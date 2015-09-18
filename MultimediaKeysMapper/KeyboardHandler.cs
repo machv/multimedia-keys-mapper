@@ -10,7 +10,7 @@ using System.Windows.Interop;
 
 namespace MultimediaKeysMapper
 {
-    public class KeyboardHandler : IDisposable
+    public class KeyboardHotKeys : IDisposable
     {
         public event EventHandler MyKeyPressed;
 
@@ -87,7 +87,7 @@ namespace MultimediaKeysMapper
             return false;
         }
 
-        public KeyboardHandler(Window mainWindow)
+        public KeyboardHotKeys(Window mainWindow)
         {
             hid = GetType().GetHashCode();
             _mainWindow = mainWindow;
@@ -96,7 +96,7 @@ namespace MultimediaKeysMapper
             ComponentDispatcher.ThreadPreprocessMessage += ComponentDispatcher_ThreadPreprocessMessage;
         }
 
-        public KeyboardHandler(Window mainWindow, int id)
+        public KeyboardHotKeys(Window mainWindow, int id)
         {
             hid = id;
             _mainWindow = mainWindow;

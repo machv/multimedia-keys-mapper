@@ -20,7 +20,7 @@ namespace MultimediaKeysMapper
     /// </summary>
     public partial class MainWindow : Window
     {
-        public KeyboardHandler keyHandler;
+        public KeyboardHotKeys keyHandler;
 
         public MainWindow()
         {
@@ -32,7 +32,7 @@ namespace MultimediaKeysMapper
         {
             var _host = new System.Windows.Interop.WindowInteropHelper(this);
 
-            keyHandler = new KeyboardHandler(this, 202);
+            keyHandler = new KeyboardHotKeys(this, 202);
             keyHandler.MyKeyPressed += new EventHandler(k_MyKeyPressed);
             bool registration = keyHandler.RegisterHotKey(MainKey.WinKey, 0x71); //delete
             if (!registration)
@@ -41,7 +41,7 @@ namespace MultimediaKeysMapper
             }
 
 
-            keyHandler = new KeyboardHandler(this, 203);
+            keyHandler = new KeyboardHotKeys(this, 203);
             keyHandler.MyKeyPressed += new EventHandler(k_MyKeyPressed);
             registration = keyHandler.RegisterHotKey(MainKey.WinKey, 0x72); // end
             if (!registration)
@@ -49,7 +49,7 @@ namespace MultimediaKeysMapper
                 MessageBox.Show("Nepovedlo se asociovat klávesovou zkratku pro rychlé odesílání.");
             }
 
-            keyHandler = new KeyboardHandler(this, 204);
+            keyHandler = new KeyboardHotKeys(this, 204);
             keyHandler.MyKeyPressed += new EventHandler(k_MyKeyPressed);
             registration = keyHandler.RegisterHotKey(MainKey.WinKey, 0x73); // page down
             if (!registration)
@@ -60,9 +60,9 @@ namespace MultimediaKeysMapper
 
         void k_MyKeyPressed(object sender, EventArgs e)
         {
-            if (sender is KeyboardHandler)
+            if (sender is KeyboardHotKeys)
             {
-                KeyboardHandler handler = sender as KeyboardHandler;
+                KeyboardHotKeys handler = sender as KeyboardHotKeys;
 
                 switch (handler.Hid)
                 {
