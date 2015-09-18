@@ -25,6 +25,22 @@ namespace MultimediaKeysMapper
         public MainWindow()
         {
             InitializeComponent();
+
+            System.Windows.Forms.NotifyIcon ni = new System.Windows.Forms.NotifyIcon();
+
+            System.IO.Stream iconStream = Application.GetResourceStream(new Uri("pack://application:,,,/Icons/App.ico")).Stream;
+            ni.Icon = new System.Drawing.Icon(iconStream);
+
+            ni.Visible = true;
+            ni.DoubleClick +=
+                delegate (object sender, EventArgs args)
+                {
+                    Show();
+                    WindowState = WindowState.Normal;
+                };
+
+            // and hide
+            Hide();
         }
 
         // https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
