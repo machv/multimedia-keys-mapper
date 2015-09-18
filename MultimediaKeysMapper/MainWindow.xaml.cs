@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,6 +42,22 @@ namespace MultimediaKeysMapper
 
             // and hide
             Hide();
+
+            // register to run at startup
+            RegistryKey rkApp = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            if (rkApp.GetValue("MachMultimediaKeysMapper") == null)
+            {
+                rkApp.SetValue("MachMultimediaKeysMapper", System.Reflection.Assembly.GetExecutingAssembly().Location);
+            }
+
+        }
+
+        protected override void OnStateChanged(EventArgs e)
+        {
+            if (WindowState == WindowState.Minimized)
+                Hide();
+
+            base.OnStateChanged(e);
         }
 
         // https://msdn.microsoft.com/en-us/library/windows/desktop/dd375731(v=vs.85).aspx
